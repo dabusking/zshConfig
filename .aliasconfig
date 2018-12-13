@@ -20,20 +20,20 @@ alias c='clear'
 alias storm='open -a /Applications/WebStorm.app/ '
 alias md='open -a /Applications/MacDown.app/ '
 alias idea='open -a /Applications/IntelliJ\ IDEA.app/ '
-alias atom='open -a /Applications/Atom\ Beta.app/ '
+alias atom='open -a /Applications/Atom.app/ '
 
 # config access
-alias va='vim ~/.config/.aliasconfig'
-alias vf='vim ~/.config/.functions'
-alias vb='vim ~/.config/.bash_profile'
-alias vz='vim ~/.config/.zshrc'
+alias va='vim ~/config/.aliasconfig'
+alias vf='vim ~/config/.functions'
+alias vb='vim ~/config/.bash_profile'
+alias vz='vim ~/config/.zshrc'
 alias sb='source ~/.bash_profile'
 alias sz='source ~/.zshrc'
 
 # upgrade built-in utilities
 alias top='htop'
 alias du='ncdu'
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim -v'
+#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim -v'
 alias ls='gls -Ahl --color --time-style=+"%Y-%m-%d %H:%M:%S"'
 alias mkdir='mkdir -pv'
 alias cat='pygmentize -O style=monokai -f console256 -g'
@@ -69,6 +69,12 @@ alias brew.list='echo "brew services list" && brew services list'
 # npm
 alias updateComponentLibrary='npm i @lmig/lmb-react-component-lib@latest'
 alias npm.list.global='npm list -g --depth=0'
+
+# UI Project npm commands
+alias npm.s='npm run start'
+alias npm.t='npm run test'
+alias npm.tw='npm run test:watch'
+alias npm.tc='npm run test:coverage-html'
 
 # vagrant
 alias vup='vagrant up; vagrant ssh'
