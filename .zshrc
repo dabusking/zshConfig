@@ -63,36 +63,36 @@ source $ZSH/oh-my-zsh.sh
 # ==============================================
 #     LOAD SCRIPTS
 # ==============================================
-WORK_COMPUTER=LIBP45P-18293WL
-HOME_COMPUTER=Home-MBP.local
+#WORK_COMPUTER=LIBP45P-18293WL
+#HOME_COMPUTER=Home-MBP.local
 
 # java 7/8/9 toggle
-if [ -f ~/config/.javatoggle ]; then
-  source ~/config/.javatoggle
-else
-  print "Java toggle not loaded!"
-fi
+#if [ -f ~/config/.javatoggle ]; then
+#  source ~/config/.javatoggle
+#else
+#  print "Java toggle not loaded!"
+#fi
 
 # aliases
-if [ -f ~/config/.aliasconfig ]; then
-  source ~/config/.aliasconfig
+if [ -f ~/zshConfig/.aliasconfig ]; then
+  source ~/zshConfig/.aliasconfig
 else
   print "Aliases not loaded!"
 fi
 
 # functions
-if [ -f ~/config/.functions ]; then
-	source ~/config/.functions
+if [ -f ~/zshConfig/.functions ]; then
+	source ~/zshConfig/.functions
 else
-	print "Functionsi not loaded!"
+	print "Functions not loaded!"
 fi
 
 # mavenconfig
-#if [ -f ~/config/.mavenconfig ]; then
- # source ~/config/.mavenconfig
+#if [ -f ~/zshConfig/.mavenconfig ]; then
+ # source ~/zshConfig/.mavenconfig
 #else
  # print "Mavenconfig not loaded! Loading from bash profile"
-  #source ~/.bash_profile
+ # source ~/.bash_profile
 #fi
 
 COMPLETION_WAITING_DOTS="true"  # Display red dots while waiting for completion.
@@ -107,7 +107,7 @@ chpwd() { ls }
 #     PATH VARIABLES & OTHER SETTINGS
 # ==============================================
 export LD_LIBRARY_PATH=/usr/local/apr/lib:$LD_LIBRARY_PATH
-PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/lib:/Users/n0253253/Documents/apache-maven-3.3.9/bin:$PATH"
+PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/lib:/Users/n0253253/config/apache-maven-3.6.0/bin:$PATH"
 export PATH
 
 export SPRING_PROFILES_ACTIVE=local

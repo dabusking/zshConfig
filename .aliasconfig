@@ -17,9 +17,9 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 alias c='clear'
 
 # open in application
-alias storm='open -a /Applications/WebStorm.app/ '
+alias storm='open -a /Users/n0253253/Library/Application\ Support/JetBrains/Toolbox/apps/WebStorm/ch-0/183.4284.130/WebStorm.app/ '
 alias md='open -a /Applications/MacDown.app/ '
-alias idea='open -a /Applications/IntelliJ\ IDEA.app/ '
+alias idea='open -a /Users/n0253253/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/192.5728.98/IntelliJ\ IDEA.app/ '
 alias atom='open -a /Applications/Atom.app/ '
 
 # config access
