@@ -18,7 +18,8 @@ plugins=(
   osx
   svn
   z
-  zsh-syntax-highlighting
+  wd
+  chucknorris
 )
 
 
@@ -67,11 +68,11 @@ source $ZSH/oh-my-zsh.sh
 #HOME_COMPUTER=Home-MBP.local
 
 # java 7/8/9 toggle
-#if [ -f ~/config/.javatoggle ]; then
-#  source ~/config/.javatoggle
-#else
-#  print "Java toggle not loaded!"
-#fi
+if [ -f ~/zshConfig/.javatoggle ]; then
+  source ~/zshConfig/.javatoggle
+else
+  print "Java toggle not loaded!"
+fi
 
 # aliases
 if [ -f ~/zshConfig/.aliasconfig ]; then
@@ -106,9 +107,125 @@ chpwd() { ls }
 # ==============================================
 #     PATH VARIABLES & OTHER SETTINGS
 # ==============================================
-export LD_LIBRARY_PATH=/usr/local/apr/lib:$LD_LIBRARY_PATH
-PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/lib:/Users/n0253253/config/apache-maven-3.6.0/bin:$PATH"
-export PATH
+export SPRING PROFILES_ACTIVE=local
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/
+export PATH=$PATH:/Users/rumsw3/config/apache-maven-3.6.2/bin
 
-export SPRING_PROFILES_ACTIVE=local
+
+
+# Local proxy address defined in SquidMan
+LOCAL_PROXY_ADDR=http://localhost:8585
+# --- ProxyOff ----
+# Turn off proxy settings for Squidman.
+proxyOff() {
+  echo 'Setting up proxyless env...'
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy
+  npm config rm proxy
+  npm config rm https-proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
+  unset ALL_PROXY
+  unset http_proxy
+  unset https_proxy
+  unset all_proxy
+  echo '' > ~/.curlrc
+  echo '' > ~/.wgetrc
+  sudo networksetup -setautoproxystate "Wi-Fi" off
+  # Quit SquidMan
+  osascript -e 'quit app "SquidMan"'
+ 
+ 
+  # Detects all network hardware & creates services for all installed network hardware
+  /usr/sbin/networksetup -detectnewhardware
+ 
+  IFS=$'\n'
+ 
+  #Loops through the list of network services
+  for i in $(/usr/sbin/networksetup -listallnetworkservices | tail +2 );
+ 
+    do 
+       
+      # Turn off auto proxy
+      /usr/sbin/networksetup -setautoproxystate "$i" off
+      echo "Turned off auto proxy for interface $i"
+     
+    done
+ 
+  unset IFS
+ 
+  echo "Auto proxy for all interfaces turned off"
+}
+ 
+# --- ProxyOn ---
+# Turn on proxy settings for Squidman.
+ 
+proxyOn() {
+  # HARDCODED VALUES ARE SET HERE
+  autoProxyURL="http://pac.lfg.com/pac"
+ 
+  echo 'Setting up proxy env...'
+  sudo networksetup -setautoproxyurl "Wi-Fi" $autoProxyURL
+  export HTTP_PROXY=$LOCAL_PROXY_ADDR
+  export HTTPS_PROXY=$LOCAL_PROXY_ADDR
+  export ALL_PROXY=$LOCAL_PROXY_ADDR
+  export http_proxy=$LOCAL_PROXY_ADDR
+  export https_proxy=$LOCAL_PROXY_ADDR
+  export all_proxy=$LOCAL_PROXY_ADDR
+  echo 'proxy='$LOCAL_PROXY_ADDR > ~/.curlrc
+  echo 'use_proxy=yes' > ~/.wgetrc
+  echo 'http_proxy='$LOCAL_PROXY_ADDR >> ~/.wgetrc
+  echo 'https_proxy='$LOCAL_PROXY_ADDR >> ~/.wgetrc
+  git config --global http.proxy $LOCAL_PROXY_ADDR
+  git config --global https.proxy $LOCAL_PROXY_ADDR
+  npm config set proxy $LOCAL_PROXY_ADDR
+  npm config set https-proxy $LOCAL_PROXY_ADDR
+  sudo networksetup -setautoproxystate "Wi-Fi" on
+  # Open SquidMan
+  open -a SquidMan
+ 
+ 
+  # CHECK TO SEE IF A VALUE WAS PASSED FOR $4, AND IF SO, ASSIGN IT
+  if [ "$4" != "" ] && [ "$autoProxyURL" == "" ]; then
+  autoProxyURL=$4
+  fi
+ 
+  # Detects all network hardware & creates services for all installed network hardware
+  /usr/sbin/networksetup -detectnewhardware
+ 
+  IFS=$'\n'
+ 
+          #Loops through the list of network services
+          for i in $(networksetup -listallnetworkservices | tail +2 );
+          do
+           
+                  # Get a list of all services
+                  autoProxyURLLocal=`/usr/sbin/networksetup -getautoproxyurl "$i" | head -1 | cut -c 6-`
+                   
+                  # Echo's the name of any matching services & the autoproxyURL's set
+                  echo "$i Proxy set to $autoProxyURLLocal"
+           
+                  # If the value returned of $autoProxyURLLocal does not match the value of $autoProxyURL for the interface $i, change it.
+                  if [[ $autoProxyURLLocal != $autoProxyURL ]]; then
+                          /usr/sbin/networksetup -setautoproxyurl $i $autoProxyURL
+                          echo "Set auto proxy for $i to $autoProxyURL"
+                  fi
+                   
+                  # Enable auto proxy once set
+                  /usr/sbin/networksetup -setautoproxystate "$i" on
+                  echo "Turned on auto proxy for $i"
+           
+          done
+ 
+  unset IFS
+ 
+  # Echo that we're done
+  echo "Auto proxy present, correct & enabled for all interfaces"
+ 
+}
+
+
 export EDITOR='vim'
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

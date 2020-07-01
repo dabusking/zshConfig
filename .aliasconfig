@@ -19,8 +19,9 @@ alias c='clear'
 # open in application
 alias storm='open -a /Users/n0253253/Library/Application\ Support/JetBrains/Toolbox/apps/WebStorm/ch-0/183.4284.130/WebStorm.app/ '
 alias md='open -a /Applications/MacDown.app/ '
-alias idea='open -a /Users/n0253253/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/192.5728.98/IntelliJ\ IDEA.app/ '
+alias idea='open -a /Users/rumsw3/Library/Application\ Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/192.5728.98/IntelliJ\ IDEA.app/ '
 alias atom='open -a /Applications/Atom.app/ '
+alias vscode='open -a /Applications/VisualStudioCode.app/ '
 
 # config access
 alias va='vim ~/config/.aliasconfig'

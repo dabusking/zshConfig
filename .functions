@@ -105,6 +105,6 @@ squash() {
 # A motivating welcome message after sourcing
 welcomeMessage() {
   echo ''
-  fortune | lolcat
+  fortune | cowsay | lolcat
   echo ''
 }

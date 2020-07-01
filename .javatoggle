@@ -1,11 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-export JAVA_7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
-export JAVA_9_HOME=/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home
+export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+export JAVA_11_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
 
-alias java7='export JAVA_HOME=$JAVA_7_HOME && java -version'
 alias java8='export JAVA_HOME=$JAVA_8_HOME && java -version'
-alias java9='export JAVA_HOME=$JAVA_9_HOME && java -version'
+alias java11='export JAVA_HOME=$JAVA_11_HOME && java -version'
 
 #default java8
 export JAVA_HOME=$JAVA_8_HOME
